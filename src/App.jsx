@@ -70,7 +70,7 @@ export default function App() {
     setFinished(true);
     setStarted(false);
     try {
-      const response = await fetch("/api/results", {
+      const response = await fetch("https://keyflow-typing-test-api.onrender.com/api/results", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(result)
@@ -139,7 +139,7 @@ export default function App() {
         createdAt: new Date().toISOString()
       };
       setLastResult(result);
-      fetch("/api/results", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(result) })
+      fetch("https://keyflow-typing-test-api.onrender.com/api/results", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(result) })
         .then((r) => r.ok ? r.json() : null)
         .then((data) => { if (data?.result) { result.id = data.result.id; setLastResult({ ...result }); setHistory((old) => [data.result, ...old].slice(0, 10)); } })
         .catch(() => setNotice("Result shown locally. Start the API server to save test history."));
@@ -184,7 +184,7 @@ export default function App() {
 
   const loadHistory = async () => {
     try {
-      const response = await fetch("/api/results");
+      const response = await fetch("https://keyflow-typing-test-api.onrender.com/api/results");
       if (response.ok) {
         const data = await response.json();
         setHistory(data.results || []);
