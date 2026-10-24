@@ -55,5 +55,8 @@ app.post("/api/results", (req, res) => {
   res.status(201).json({ result: row });
 });
 
-app.listen(PORT, () => console.log(`KeyFlow API running at http://localhost:${PORT}`));
+
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`KeyFlow API running on port ${PORT}`);
+});
 
